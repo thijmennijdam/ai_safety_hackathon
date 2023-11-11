@@ -33,10 +33,10 @@ def main():
         wandb.init(project="toymodel", name="feature_importance_0.8") 
 
 
-    # train_toymodel = True 
-    train_toymodel = False
+    bool_train_toymodel = True 
+    # bool_train_toymodel = False
     
-    if train_toymodel:
+    if bool_train_toymodel:
         # train the toy model
         toymodel = train_toymodel(input_dim=input_dim, hidden_dim=hidden_dim, train_cfg=train_cfg)
         visualize(toymodel)
