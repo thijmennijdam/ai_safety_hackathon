@@ -35,12 +35,11 @@ A step-by-step guide on how to use the software, including code snippets and scr
 ## Resources
 Links to resources used in the project, including papers, articles, and tools:
 
-Toy Models of Superposition
-Towards Monosemanticity
-Sparse Autoencoders in Language Models
-Automatic Circuit Discovery for Mechanistic Interpretability
-Interpretability in the Wild
-
+[Toy Models of Superposition](https://transformer-circuits.pub/2022/toy_model/index.html#motivation)
+[Towards Monosemanticity](https://transformer-circuits.pub/2023/monosemantic-features)
+[Sparse Autoencoders in Language Models](https://arxiv.org/abs/2309.08600)
+[Automatic Circuit Discovery for Mechanistic Interpretability](https://arxiv.org/abs/2304.14997)
+[Interpretability in the Wild](https://www.neelnanda.io/mechanistic-interpretability/walkthrough-ioi)
 
 ## Result visualizations
 
