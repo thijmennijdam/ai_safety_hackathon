@@ -32,7 +32,13 @@ cd ai_safety_hackathon
 ## Usage
 A step-by-step guide on how to use the software, including code snippets and screenshots for clarity.
 
-## Example code snippet
+## Images
+
+![inp-toy](imgs/inp-toy.jpg)
+
+![inp-sae](imgs/inp-sae.jpg)
+
+![showing superposition](imgs/showing-superpos.jpg)
 
 ## Contributing
 Guidelines for how others can contribute to the project. Include instructions for submitting pull requests, coding standards, and how to run tests.
