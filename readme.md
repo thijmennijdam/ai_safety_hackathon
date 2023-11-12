@@ -1,4 +1,4 @@
-# Automated Feature Discovery for AI Safety - The Circuit Breakers
+# Automated Feature Discovery for AI Safety
 
 ## Overview
 This repository contains the work of Team Circuit Breakers for the AI Safety Hackathon hosted at TU Delft. Our project aims to advance the field of AI safety by developing a novel method for automated feature discovery using sparse autoencoders.
@@ -35,11 +35,13 @@ A step-by-step guide on how to use the software, including code snippets and scr
 ## Resources
 Links to resources used in the project, including papers, articles, and tools:
 
-[Toy Models of Superposition](https://transformer-circuits.pub/2022/toy_model/index.html#motivation)
-[Towards Monosemanticity](https://transformer-circuits.pub/2023/monosemantic-features)
-[Sparse Autoencoders in Language Models](https://arxiv.org/abs/2309.08600)
-[Automatic Circuit Discovery for Mechanistic Interpretability](https://arxiv.org/abs/2304.14997)
-[Interpretability in the Wild](https://www.neelnanda.io/mechanistic-interpretability/walkthrough-ioi)
+- [Toy Models of Superposition](https://transformer-circuits.pub/2022/toy_model/index.html#motivation)
+- [Towards Monosemanticity](https://transformer-circuits.pub/2023/monosemantic-features)
+- [Sparse Autoencoders in Language Models](https://arxiv.org/abs/2309.08600)
+- [Automatic Circuit DisCovery for Mechanistic Interpretability](https://arxiv.org/abs/2304.14997)
+- [Automatic Circuit DisCovery++](https://github.com/Aaquib111/acdcpp)
+- [Interpretability in the Wild](https://www.neelnanda.io/mechanistic-interpretability/walkthrough-ioi)
+
 
 ## Result visualizations
 
@@ -54,7 +56,10 @@ Links to resources used in the project, including papers, articles, and tools:
 This project was completed by Patrik Bartak, Derck Prinzhorn, Thijmen Nijdam, Gijs de Jong, Leonard Bereska
 
 ## Acknowledgements
-Acknowledgements for any support received during the hackathon, including API credits, computing resources, and any individuals or organizations that provided assistance.
+We would like to thank the people of Entrepreneur First and Apart Research for organising the hackathon and more importantly their mentorship during our process.
+
+
+A special thanks to [Can Rager](https://github.com/canrager) for their help with acdc++ and their valuable insight into attribution patching! 
 
 ## License
 MIT
