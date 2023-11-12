@@ -32,14 +32,6 @@ cd ai_safety_hackathon
 ## Usage
 A step-by-step guide on how to use the software, including code snippets and screenshots for clarity.
 
-## Images
-
-![inp-toy](imgs/inp-toy.jpg)
-
-![inp-sae](imgs/inp-sae.jpg)
-
-![showing superposition](imgs/showing-superpos.jpg)
-
 ## Contributing
 Guidelines for how others can contribute to the project. Include instructions for submitting pull requests, coding standards, and how to run tests.
 
@@ -52,8 +44,18 @@ Sparse Autoencoders in Language Models
 Automatic Circuit Discovery for Mechanistic Interpretability
 Interpretability in the Wild
 
+
+## Result visualizations
+
+![inp-toy](imgs/inp-toy.jpg)
+
+![inp-sae](imgs/inp-sae.jpg)
+
+![showing superposition](imgs/showing-superpos.jpg)
+
+
 ## Team
-Information about the team members and their roles.
+This project was completed by Patrik Bartak, Derck Prinzhorn, Thijmen Nijdam, Gijs de Jong, Leonard Bereska
 
 ## Acknowledgements
 Acknowledgements for any support received during the hackathon, including API credits, computing resources, and any individuals or organizations that provided assistance.
