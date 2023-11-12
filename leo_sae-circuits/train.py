@@ -8,8 +8,8 @@ from toymodel import ToyModel, train_toymodel, visualize
 from sae import SAE, train_sae
 from toy_sae_model import ToySAEModel
 
-from utils import plot_inputs_and_outputs, plot_inputs_and_sae_encoding 
-from tests import test_reconstruction
+from utils import plot_inputs_and_outputs, plot_inputs_and_sae_encoding, visualize_feature_gradients
+from tests import test_reconstruction, test_reconstruction_one_feature
 
 
 def main():
@@ -23,7 +23,7 @@ def main():
     # importance_decay = 0.7
     # feature_importance = torch.from_numpy(np.array([importance_decay**i for i in range(input_dim)])).float().to(device)
     # feature_importance = torch.from_numpy(np.array([1, 1, 0, 0, 0])).float().to("cuda")
-    feature_importance = torch.ones(input_dim, device=device)  # give equal importance to all features 
+    feature_importance = torch.ones(input_dim, device=device, requires_grad=True)  # give equal importance to all features 
 
     train_toymodel_cfg = {
         "num_iterations": 10000,
@@ -75,20 +75,25 @@ def main():
 
 
     # check if the reconstruction error is small
-    toysaemodel = ToySAEModel(input_dim=input_dim, hidden_dim=hidden_dim, toymodel=toymodel, sae=sae, insert_sae=False)
-    mse, stdev = test_reconstruction(toysaemodel)
-    print(f"toymodel mse: {mse} ± {stdev}")
-    toysaemodel = ToySAEModel(input_dim=input_dim, hidden_dim=hidden_dim, toymodel=toymodel, sae=sae, insert_sae=True)
-    mse, stdev = test_reconstruction(toysaemodel)
-    print(f"toysaemodel mse: {mse} ± {stdev}")
-
-    
-    # metric to gradient of weight, reconstruction loss to part of the features see which features are implicated
+    # toy_nonsae_model = ToySAEModel(input_dim=input_dim, hidden_dim=hidden_dim, toymodel=toymodel, sae=sae, insert_sae=False)
+    # mse, stdev = test_reconstruction(toy_nonsae_model)
+    # print(f"toymodel mse: {mse} ± {stdev}")
+    toy_sae_model = ToySAEModel(input_dim=input_dim, hidden_dim=hidden_dim, toymodel=toymodel, sae=sae, insert_sae=True)
+    # mse, stdev = test_reconstruction(toy_sae_model)
+    # print(f"toysaemodel mse: {mse} ± {stdev}")
 
     # implement reconstruction loss with respect for one feature 
     # run the toysaemodel and backwards through the sae and see which features are implicated
     # by printing the gradients
-
+    
+    features, mse_one_feature = test_reconstruction_one_feature(toy_sae_model)
+    print(f"toysaemodel mse one feature: {mse_one_feature}")
+    features_grad = features.grad
+    visualize_feature_gradients(features_grad, n_vectors=1)
+    # How to get the gradients wr.t. to the features?
+    # features are the variables encoded by the sae
+    # features = sae.encode(toymodel.encode(x))
+    
 
     if use_wandb:
         wandb.finish()

@@ -147,3 +147,36 @@ def find_permutation_to_align_features_with_input(first_matrix, second_matrix):
 
 # def metric_mean_max_cosine_similarity()
 # https://www.alignmentforum.org/posts/z6QQJbtpkEAX3Aojj/interim-research-report-taking-features-out-of-superposition
+
+
+def visualize_feature_gradients(feature_gradients, n_vectors=10):
+    """
+    Visualize the first `n_vectors` feature gradient vectors in a grid.
+    :param feature_gradients: A PyTorch tensor of gradients of shape (n_samples, feature_dim).
+    :param n_vectors: Number of gradient vectors to visualize.
+    """
+    # Convert the gradients to numpy for visualization
+    gradients_np = feature_gradients.detach().cpu().numpy()
+
+    # Select the first `n_vectors` for visualization
+    selected_gradients = gradients_np[:n_vectors]
+
+    # Number of subplots needed
+    n_cols = min(n_vectors, 5)  # Limit columns to 5 for readability
+    n_rows = int(np.ceil(n_vectors / n_cols))
+
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(n_cols * 3, n_rows * 3))
+    axes = axes.flatten() if n_vectors > 1 else [axes]
+
+    for i, ax in enumerate(axes):
+        if i < n_vectors:
+            ax.imshow(np.atleast_2d(selected_gradients[i]), aspect='auto', cmap='viridis')
+            ax.set_title(f'Gradient Vector {i+1}')
+            ax.set_xlabel('Feature Dimension')
+            ax.set_ylabel('Gradient Value')
+        else:
+            ax.axis('off')
+
+    plt.tight_layout()
+    plt.show()
+    

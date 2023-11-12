@@ -20,7 +20,7 @@ def test_sae(toymodel, sae, input_dim):
     print(sae.decode(sae_encoding))
 
 
-def test_reconstruction(toysaemodel):
+def test_reconstruction(toysaemodel, one_feature=False):
     input_dim = toysaemodel.toymodel.input_dim
     n_samples = 10000
     inputs = random_sparse_input(input_dim, feature_sparsity=0.8, batch_size=n_samples)
@@ -30,12 +30,60 @@ def test_reconstruction(toysaemodel):
     # output = toysaemodel.toymodel.decode(encoding)
     # print(output.shape)
 
-
     outputs = toysaemodel(inputs)
     print(outputs.shape)
     outputs = outputs.detach().numpy()
 
-    se = (inputs - outputs)**2
+    if one_feature:
+        # define se for one feature
+        se = (inputs[:, 0] - outputs[:, 0])**2
+    else:
+        se = (inputs - outputs)**2
+    
     mse =  torch.mean(se)
+    mse.backward()
+    
+    print("gradients of feature importance")
     stdev = torch.std(se) / np.sqrt(n_samples) 
     return mse, stdev
+
+def test_reconstruction_one_feature(toysaemodel):
+    input_dim = toysaemodel.toymodel.input_dim
+    # n_samples = 50
+    one_hot_vector = torch.zeros(size=(input_dim,))
+    one_hot_vector[0] = 1
+    inputs = one_hot_vector    
+    
+    # inputs = random_sparse_input(input_dim, feature_sparsity=0.8, batch_size=one_hot_vector)
+    
+    # use retain_grad()
+    inputs.requires_grad = True
+    
+    # forward pass through ToyModel and SAE
+    features = toysaemodel.sae.encode(toysaemodel.toymodel.encode(inputs))
+    features.retain_grad()
+    # decode all the way back to the input
+    outputs = toysaemodel.toymodel.decode(toysaemodel.sae.decode(features))
+
+    
+    
+    loss = torch.mean((features[:, 0] - outputs[:, 0])**2)
+    
+    loss.backward()
+    
+    print("loss:", loss)
+    print("grad of loss with respect to the feature")
+    print(features.grad)
+    
+    print(features.grad.shape)
+    # print("features before backward pass")
+    # # print(features.grad)
+    # # backward pass
+
+    # # accessing the gradients with respect to the input
+    # gradients = inputs.grad
+    # grad_feature = features.grad
+    
+    # print("Gradients with respect to the input:", gradients)
+    
+    return features, loss
